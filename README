@@ -1,0 +1,15 @@
+# 🛡️ Sistema de Control de Acceso RFID (Módulo 1)
+**Proyecto de Ingeniería en Automatización**
+
+Este repositorio contiene un sistema modular de validación de identidad mediante tecnología RFID a 13.56 MHz, diseñado para ser integrado en bancos de pruebas automotrices.
+
+## 🚀 Características
+* **Arquitectura Modular**: Lógica de sensores separada del núcleo (`main.cpp`).
+* **Control de Estado**: Implementación de lógica *Toggle* para manejo de Relay.
+* **Feedback Dual**: Notificaciones por Buzzer y Monitor Serial.
+
+## 🛠️ Hardware
+* Arduino Uno
+* Sensor RFID-RC522
+* Módulo Relay (Pin 7)
+* Buzzer Activo (Pin 8)
