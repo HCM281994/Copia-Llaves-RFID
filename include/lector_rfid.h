@@ -1,32 +1,20 @@
-#include "lector_rfid.h"
+#ifndef LECTOR_RFID_H
+#define LECTOR_RFID_H
 
-// Inicializamos el objeto aquí si no se hizo en el .h
-MFRC522 mfrc522(SS_PIN, RST_PIN);
+#include <Arduino.h>
+#include <SPI.h>
+#include <MFRC522.h>
 
-void inicializarSistema() {
-    SPI.begin();
-    mfrc522.PCD_Init();
-    pinMode(RELAY_PIN, OUTPUT);
-    pinMode(BUZZER_PIN, OUTPUT);
-    digitalWrite(RELAY_PIN, LOW); 
-    Serial.println("Lector RFID listo...");
-}
+// Definiciones de Hardware
+#define RST_PIN 9
+#define SS_PIN 10
+#define BUZZER_PIN 8
+#define RELAY_PIN 7
 
-String obtenerUID() {
-    // Si no hay tarjeta nueva o no se puede leer, salimos
-    if (!mfrc522.PICC_IsNewCardPresent() || !mfrc522.PICC_ReadCardSerial()) {
-        return "";
-    }
+// Declaración de objetos y funciones
+extern MFRC522 mfrc522;
 
-    String uidString = "";
-    for (byte i = 0; i < mfrc522.uid.size; i++) {
-        uidString += String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : "");
-        uidString += String(mfrc522.uid.uidByte[i], HEX);
-    }
-    uidString.toUpperCase();
-    
-    mfrc522.PICC_HaltA();      // Detiene lectura de la tarjeta actual
-    mfrc522.PCD_StopCrypto1(); // Detiene el cifrado para la siguiente lectura
-    
-    return uidString;
-}
+void inicializarSistema();
+String obtenerUID();
+
+#endif
