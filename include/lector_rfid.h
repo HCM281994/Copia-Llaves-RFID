@@ -7,7 +7,7 @@
 
 // Definiciones de Hardware
 #define RST_PIN 9
-#define SS_PIN 10
+#define SS_PIN 10x  
 #define BUZZER_PIN 8
 #define RELAY_PIN 7
 
