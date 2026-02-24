@@ -9,7 +9,7 @@
 #define RST_PIN 9
 #define SS_PIN 10x  
 #define BUZZER_PIN 8
-#define RELAY_PIN 7
+#define RELAY_PIN 12
 
 // Declaración de objetos y funciones
 extern MFRC522 mfrc522;
