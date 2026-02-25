@@ -47,6 +47,7 @@ graph TD
     G --> K
     K --> D
 
+
     Descripción Técnica de los Estados:
 Inicialización: El sistema verifica la integridad del bus SPI para el lector MFRC522 y recupera los punteros de memoria de la carpeta lib/ para gestionar la EEPROM.
 
