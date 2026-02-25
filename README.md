@@ -33,9 +33,6 @@ El proyecto sigue una organización industrial para facilitar el mantenimiento y
 * **`lib/`**: Controladores específicos para el hardware RFID y gestión de memoria.
 * **`test/`**: Ent
 
-```markdown
-* **`test/`**: Suite de pruebas unitarias automatizadas para validar la lógica de acceso sin necesidad de hardware físico.
-
 ---
 
 ## 🧪 Validación y Calidad de Software (Unit Testing)
