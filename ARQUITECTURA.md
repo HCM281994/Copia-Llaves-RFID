@@ -16,6 +16,7 @@ Desarrolla la lógica del controlador (driver) del sensor MFRC522. Gestiona la c
 ### 4. src/main.cpp (Lógica de Negocio y Orquestación)
 Es el núcleo del sistema. Coordina la interacción entre las entradas (lector RFID, botón de salida) y las salidas (Relay, LEDs, Buzzer). Implementa la gestión de permisos mediante la comparación de UIDs y la persistencia de datos en la memoria EEPROM.
 
+
 ## Flujo de Datos
 1. **Captura**: El sensor detecta un campo magnético y extrae el UID.
 2. **Procesamiento**: El módulo `lector_rfid` formatea el UID como un String hexadecimal.
