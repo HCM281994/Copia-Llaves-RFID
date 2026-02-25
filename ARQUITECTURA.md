@@ -27,7 +27,7 @@ Es el núcleo del sistema. Coordina la interacción entre las entradas (lector R
 
 ```mermaid
 graph TD
-    A["Inicio: Power On] --> B[Inicializar Hardware: RFID, LEDs, Buzzer"]
+    A["Inicio: Power On"] --> B["Inicializar Hardware: RFID, LEDs, Buzzer"]
     B --> C[Cargar IDs Autorizados desde EEPROM]
     C --> D{¿Tarjeta Detectada?}
     D -- No --> D
