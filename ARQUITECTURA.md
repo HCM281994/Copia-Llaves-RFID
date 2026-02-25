@@ -61,13 +61,19 @@ Acceso Denegado: El sistema ignora lecturas consecutivas de la misma tarjeta dur
 💾 Mapa de Memoria EEPROM
 Para garantizar la persistencia de las identidades autorizadas, el sistema utiliza un esquema de direccionamiento estático en la EEPROM del microcontrolador. La estructura está diseñada para minimizar los ciclos de escritura y maximizar la vida útil de la memoria.
 
-Dirección (Offset),Tamaño (Bytes),Descripción Técnica
-0x00,1,Magic Byte: Indica si la memoria ya ha sido inicializada anteriormente.
-0x01,1,Key Count: Número actual de llaves almacenadas en el sistema.
-0x02 - 0x05,4,Master Key UID: Identificador único de la tarjeta de administración.
-0x06 - 0x09,4,Slot 1: UID de la primera llave autorizada.
-0x0A - 0x0D,4,Slot 2: UID de la segunda llave autorizada.
-0x0E - ...,4,Slots N: Espacio reservado para llaves adicionales (Hasta 100 slots).
+## 💾 Mapa de Distribución de Memoria EEPROM
+
+Para asegurar la persistencia de los datos y la eficiencia en la lectura, se ha definido el siguiente mapa de memoria en la EEPROM del microcontrolador:
+
+| Dirección (Hex) | Tamaño (Bytes) | Campo Técnico         | Función del Sistema                                     |
+| :---           | :---           | :---                  | :---                                                    |
+| **0x00** | 1              | `MAGIC_BYTE`          | Firma de validación (Indica si la EEPROM fue inicializada). |
+| **0x01** | 1              | `KEY_COUNT`           | Contador total de llaves registradas en el sistema.     |
+| **0x02** | 4              | `MASTER_UID`          | UID de la llave maestra con permisos de programación.   |
+| **0x06** | 4              | `SLOT_01_UID`         | Primer identificador de acceso autorizado.               |
+| **0x0A** | 4              | `SLOT_02_UID`         | Segundo identificador de acceso autorizado.              |
+| **0x0E** | 4              | `SLOT_03_UID`         | Tercer identificador de acceso autorizado.               |
+| **...** | 4              | `SLOT_N_UID`          | Espacio reservado para llaves adicionales (Slots 04-99). |
 
 Lógica de Gestión de Memoria:
 Lectura en el Arranque: Durante la fase de inicialización (localizada en src/), el sistema lee el Magic Byte. Si es válido, carga los UIDs en un array en la memoria RAM para una validación de acceso instantánea.
