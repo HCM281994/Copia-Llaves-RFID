@@ -23,9 +23,6 @@ Es el núcleo del sistema. Coordina la interacción entre las entradas (lector R
 3. **Validación**: `main.cpp` compara el UID con la Master Card o con los datos en la EEPROM.
 4. **Acción**: Se activan las salidas digitales (Relay/LEDs) según el resultado de la validación.
 
-🔄 Diagrama de Flujo de la Lógica de Control
-Para asegurar una operación robusta y evitar estados de bloqueo, el firmware sigue una lógica de escaneo cíclico con validación en memoria no volátil (EEPROM).
-
 ## 🔄 Diagrama de Flujo de la Lógica de Control
 
 ```mermaid
