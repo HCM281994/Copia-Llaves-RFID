@@ -25,6 +25,7 @@ Es el núcleo del sistema. Coordina la interacción entre las entradas (lector R
 🔄 Diagrama de Flujo de la Lógica de Control
 Para asegurar una operación robusta y evitar estados de bloqueo, el firmware sigue una lógica de escaneo cíclico con validación en memoria no volátil (EEPROM).
 
+```mermaid
 graph TD
     A[Inicio: Power On] --> B[Inicializar Hardware: RFID, LEDs, Buzzer]
     B --> C[Cargar IDs Autorizados desde EEPROM]
@@ -33,17 +34,16 @@ graph TD
     D -- Sí --> E[Leer UID de la Tarjeta]
     E --> F{¿UID coincide con Maestro?}
     
-    F -- Sí --> G[Entrar en Modo Programación: Añadir/Borrar]
-    F -- No --> H{¿UID en Lista de Autorizados?}
+    F -- Sí --> G[Modo Programación: Añadir/Borrar]
+    F -- No --> H{¿UID en Lista Autorizados?}
     
-    H -- Sí --> I[ACCESO CONCEDIDO: Activar Relé/LED Verde]
-    H -- No --> J[ACCESO DENEGADO: LED Rojo/Buzzer]
+    H -- Sí --> I[ACCESO CONCEDIDO: Activar Relé]
+    H -- No --> J[ACCESO DENEGADO: Alerta]
     
-    I --> K[Esperar Tiempo de Cortesía]
-    J --> L[Resetear Estado de Lectura]
-    G --> L
-    K --> L
-    L --> D
+    I --> K[Resetear Estado]
+    J --> K
+    G --> K
+    K --> D
 
     Descripción Técnica de los Estados:
 Inicialización: El sistema verifica la integridad del bus SPI para el lector MFRC522 y recupera los punteros de memoria de la carpeta lib/ para gestionar la EEPROM.
