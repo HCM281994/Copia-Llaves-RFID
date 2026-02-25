@@ -32,3 +32,23 @@ El proyecto sigue una organización industrial para facilitar el mantenimiento y
 * **`include/`**: Definición de cabeceras, mapas de memoria y configuración de pines.
 * **`lib/`**: Controladores específicos para el hardware RFID y gestión de memoria.
 * **`test/`**: Ent
+
+```markdown
+* **`test/`**: Suite de pruebas unitarias automatizadas para validar la lógica de acceso sin necesidad de hardware físico.
+
+---
+
+## 🧪 Validación y Calidad de Software (Unit Testing)
+
+Para asegurar la confiabilidad del sistema de seguridad, se ha implementado una capa de pruebas unitarias utilizando el framework **Unity**. Esto permite validar cambios en la lógica de permisos sin riesgo de bloquear el acceso físico.
+
+| Caso de Prueba | Objetivo Técnico | Resultado Esperado |
+| :--- | :--- | :--- |
+| `test_uid_comparison` | Validar la función de comparación de bytes. | `True` si los UIDs coinciden. |
+| `test_access_denied` | Simular entrada de UID no registrado. | Bloqueo de salida y alerta. |
+| `test_eeprom_integrity` | Verificar persistencia tras reinicio. | Carga exitosa desde EEPROM. |
+
+---
+
+## 👨‍💻 Autor
+**Hernán Alexis Cid Miranda** *Ingeniero en Electricidad y Automatización Industrial* [Volver al Portafolio Principal](https://github.com/HCM281994)
