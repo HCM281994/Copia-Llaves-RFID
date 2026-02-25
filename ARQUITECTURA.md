@@ -57,3 +57,21 @@ Gestión de Acceso:
 Acceso Concedido: Se dispara una interrupción o delay no bloqueante para el actuador.
 
 Acceso Denegado: El sistema ignora lecturas consecutivas de la misma tarjeta durante un breve periodo para evitar spam en el log serial.
+
+💾 Mapa de Memoria EEPROM
+Para garantizar la persistencia de las identidades autorizadas, el sistema utiliza un esquema de direccionamiento estático en la EEPROM del microcontrolador. La estructura está diseñada para minimizar los ciclos de escritura y maximizar la vida útil de la memoria.
+
+Dirección (Offset),Tamaño (Bytes),Descripción Técnica
+0x00,1,Magic Byte: Indica si la memoria ya ha sido inicializada anteriormente.
+0x01,1,Key Count: Número actual de llaves almacenadas en el sistema.
+0x02 - 0x05,4,Master Key UID: Identificador único de la tarjeta de administración.
+0x06 - 0x09,4,Slot 1: UID de la primera llave autorizada.
+0x0A - 0x0D,4,Slot 2: UID de la segunda llave autorizada.
+0x0E - ...,4,Slots N: Espacio reservado para llaves adicionales (Hasta 100 slots).
+
+Lógica de Gestión de Memoria:
+Lectura en el Arranque: Durante la fase de inicialización (localizada en src/), el sistema lee el Magic Byte. Si es válido, carga los UIDs en un array en la memoria RAM para una validación de acceso instantánea.
+
+Escritura Protegida: Solo la Master Key puede activar el modo de programación para escribir en nuevos offsets de memoria, evitando modificaciones accidentales.
+
+Integridad de Datos: Se implementa una validación simple para asegurar que no se guarden UIDs duplicados o incompletos.
