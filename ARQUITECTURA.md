@@ -23,22 +23,24 @@ Es el núcleo del sistema. Coordina la interacción entre las entradas (lector R
 3. **Validación**: `main.cpp` compara el UID con la Master Card o con los datos en la EEPROM.
 4. **Acción**: Se activan las salidas digitales (Relay/LEDs) según el resultado de la validación.
 
-## 🔄 Diagrama de Flujo de la Lógica de Control
+### 🔄 Diagrama de Flujo de la Lógica de Control
 
 ```mermaid
 graph TD
-    A["Inicio: Power On"] --> B["Inicializar Hardware: RFID, LEDs, Buzzer"]
+    A["Inicio: Power On"] --> B["Inicializar Hardware: RFID, LEDs y Buzzer"]
     B --> C["Cargar IDs Autorizados desde EEPROM"]
-    C --> D{¿Tarjeta Detectada?}
-    D -- No --> D
-    D -- Sí --> E["Leer UID de la Tarjeta"]
-    E --> F{¿UID coincide con Maestro?}
+    C --> D{"¿Tarjeta Detectada?"}
     
-    F -- Sí --> G["Modo Programación: Añadir/Borrar"]
-    F -- No --> H{¿UID en Lista Autorizados?}
+    D -- "No" --> D
+    D -- "Sí" --> E["Leer UID de la Tarjeta"]
     
-    H -- Sí --> I["ACCESO CONCEDIDO: Activar Relé"]
-    H -- No --> J["ACCESO DENEGADO: Alerta"]
+    E --> F{"¿Es UID Maestro?"}
+    
+    F -- "Sí" --> G["Modo Programación: Gestionar Usuarios"]
+    F -- "No" --> H{"¿UID en Lista de Autorizados?"}
+    
+    H -- "Sí" --> I["ACCESO CONCEDIDO: Activar Relé"]
+    H -- "No" --> J["ACCESO DENEGADO: Activar Alerta"]
     
     I --> K["Resetear Estado"]
     J --> K
