@@ -28,19 +28,19 @@ Es el núcleo del sistema. Coordina la interacción entre las entradas (lector R
 ```mermaid
 graph TD
     A["Inicio: Power On"] --> B["Inicializar Hardware: RFID, LEDs, Buzzer"]
-    B --> C[Cargar IDs Autorizados desde EEPROM]
+    B --> C["Cargar IDs Autorizados desde EEPROM"]
     C --> D{¿Tarjeta Detectada?}
     D -- No --> D
-    D -- Sí --> E[Leer UID de la Tarjeta]
+    D -- Sí --> E["Leer UID de la Tarjeta"]
     E --> F{¿UID coincide con Maestro?}
     
-    F -- Sí --> G[Modo Programación: Añadir/Borrar]
+    F -- Sí --> G["Modo Programación: Añadir/Borrar"]
     F -- No --> H{¿UID en Lista Autorizados?}
     
-    H -- Sí --> I[ACCESO CONCEDIDO: Activar Relé]
-    H -- No --> J[ACCESO DENEGADO: Alerta]
+    H -- Sí --> I["ACCESO CONCEDIDO: Activar Relé"]
+    H -- No --> J["ACCESO DENEGADO: Alerta"]
     
-    I --> K[Resetear Estado]
+    I --> K["Resetear Estado"]
     J --> K
     G --> K
     K --> D
