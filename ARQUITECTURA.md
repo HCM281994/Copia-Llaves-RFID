@@ -25,6 +25,7 @@ Es el núcleo del sistema. Coordina la interacción entre las entradas (lector R
 
 ## 🔄 Diagrama de Flujo de la Lógica de Control
 
+```mermaid
 graph TD
     A[Inicio: Power On] --> B[Inicializar Hardware: RFID, LEDs, Buzzer]
     B --> C[Cargar IDs Autorizados desde EEPROM]
